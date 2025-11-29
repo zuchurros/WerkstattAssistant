@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Left Pane for Navigation -->
+    <LinearLayout
+        android:id="@+id/navigation_pane"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3">
+
+        <!-- START: ADD YOUR LOGO AND TITLE HERE -->
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="578dp"
+            android:layout_height="151dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="Workshop Robot Logo"
+            android:src="@drawable/thb_logo" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:text="Werkstatt Assistant"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- END: ADD YOUR LOGO AND TITLE HERE -->
+
+        <Button
+            android:id="@+id/btn_ausstattung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ausstattung"
+            app:backgroundTint="@color/dark_red" />
+
+        <Button
+            android:id="@+id/btn_ai_assistant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KI Assistant"
+            app:backgroundTint="@color/dark_red" />
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map"
+            app:backgroundTint="@color/dark_red" />
+
+        <Button
+            android:id="@+id/btn_bigbluebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BigBlueButton"
+            app:backgroundTint="@color/dark_red" />
+
+
+    </LinearLayout>
+
+
+    <!-- Right Pane for Content -->
+    <FrameLayout
+        android:id="@+id/content_pane"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/navigation_pane"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- START: HOME SCREEN CONTENT PLACED DIRECTLY INSIDE -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="Ansprechpersonen"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <!-- Member 1 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="#e0e0e0"
+                            android:contentDescription="Picture Member 1"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/baumann" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Philipp Baumann"
+                                android:textColor="@color/black"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mitarbeiter im Labordienst des Fachbereichs Technik"
+                                android:textSize="18sp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:autoLink="phone"
+                                android:text="Phone: +49 3381 355-321"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoLink="email"
+                                android:text="Email: philipp.baumann@th-brandenburg.de"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Member 2 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="#e0e0e0"
+                            android:contentDescription="Picture Member 2"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/fiebig" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tino Fiebig"
+                                android:textColor="@color/black"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mitarbeiter im Labordienst des Fachbereichs Technik"
+                                android:textSize="18sp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:autoLink="phone"
+                                android:text="Phone: +49 3381 355-321"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoLink="email"
+                                android:text="Email: tino.fiebig@th-brandenburg.de"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Member 3 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="#e0e0e0"
+                            android:contentDescription="Picture Member 3"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/kampf" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Carmen Kampf"
+                                android:textColor="@color/black"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Laborleiterin Fachbereich Technik"
+                                android:textSize="18sp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:autoLink="phone"
+                                android:text="Phone: +49 3381 355-376"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:autoLink="email"
+                                android:text="Email: carmen.kampf@th-brandenburg.de"
+                                android:textColorLink="@color/dark_red"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+        <!-- END: HOME SCREEN CONTENT PLACED DIRECTLY INSIDE -->
+
+    </FrameLayout>
+
+    <!-- START: ADD THIS MUTE BUTTON -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_mute_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Mute or Unmute Voice"
+        app:layout_constraintBottom_toBottomOf="@id/fab_voice_command"
+        app:layout_constraintEnd_toStartOf="@id/fab_stop_speaking"
+        app:layout_constraintTop_toTopOf="@id/fab_voice_command"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
+        tools:visibility="visible"/>
+    <!-- END: ADD THIS MUTE BUTTON -->
+
+    <!-- Voice Command Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_voice_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Activate Voice Command"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_stop_speaking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Stop Speaking"
+        android:visibility="gone"
+        app:backgroundTint="@android:color/holo_red_light"
+        app:layout_constraintBottom_toBottomOf="@id/fab_voice_command"
+        app:layout_constraintEnd_toStartOf="@id/fab_voice_command"
+        app:layout_constraintTop_toTopOf="@id/fab_voice_command"
+        android:src="@drawable/stop_icon"
+        tools:visibility="visible"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,6 +59,13 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // Setup listeners for all buttons using the safe 'binding' object
         setupClickListeners()
+
+        // Listener to show navigation pane when returning to home
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                binding.navigationPane.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun setupClickListeners() {
@@ -66,8 +73,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             checkAndRequestMicrophonePermission()
         }
 
+        binding.btnHome.setOnClickListener {
+            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+
         binding.btnAusstattung.setOnClickListener {
-            speakOut("Die Liste der verfügbaren Maschinen anzeigen.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MachinesFragment())
                 addToBackStack(null)
@@ -75,10 +85,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
-        // The btn_project listener has been removed as the button is not in the XML
-
         binding.btnMap.setOnClickListener {
-            speakOut("Der Werkstattplan wird angezeigt.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MapFragment())
                 addToBackStack(null)
@@ -87,7 +94,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding.btnBigbluebutton.setOnClickListener {
-            speakOut("Das Live-Meeting wird geöffnet.")
+            binding.navigationPane.visibility = View.GONE
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, BigBlueButtonFragment())
                 addToBackStack(null)
@@ -95,8 +102,16 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
+        binding.btnControlRobot.setOnClickListener {
+            binding.navigationPane.visibility = View.GONE
+            supportFragmentManager.beginTransaction().apply {
+                replace(binding.contentPane.id, ControlFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+
         binding.btnAiAssistant.setOnClickListener {
-            speakOut("Der KI-Assistent wird geöffnet.")
             val fragment = AiAssistantFragment()
             aiAssistantFragment = fragment
             supportFragmentManager.beginTransaction().apply {

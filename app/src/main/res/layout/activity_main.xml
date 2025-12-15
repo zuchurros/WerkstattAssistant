@@ -44,6 +44,13 @@
         <!-- END: ADD YOUR LOGO AND TITLE HERE -->
 
         <Button
+            android:id="@+id/btn_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            app:backgroundTint="@color/dark_red" />
+
+        <Button
             android:id="@+id/btn_ausstattung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,6 +68,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Map"
+            app:backgroundTint="@color/dark_red" />
+
+        <Button
+            android:id="@+id/btn_control_robot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Robot Control"
             app:backgroundTint="@color/dark_red" />
 
         <Button

@@ -27,12 +27,6 @@ class AiAssistantFragment : Fragment() {
 
         chatContainer = view.findViewById(R.id.chat_container)
         scrollView = view.findViewById(R.id.scroll_view_chat)
-        val backButton = view.findViewById<Button>(R.id.btn_back_from_ai)
-
-        backButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
-            (activity as? MainActivity)?.speakOut("Returning to the home screen.")
-        }
     }
 
     // This public method allows MainActivity to add new messages to the chat

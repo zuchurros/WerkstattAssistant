@@ -19,6 +19,7 @@ class BigBlueButtonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // This correctly inflates your fragment_bbb.xml layout
         return inflater.inflate(R.layout.fragment_bbb, container, false)
     }
 
@@ -31,11 +32,11 @@ class BigBlueButtonFragment : Fragment() {
         val meetingUrl = "https://demo.bigbluebutton.org/" // <-- IMPORTANT: Your meeting URL here
         webView.loadUrl(meetingUrl)
 
-        // Setup the back button
+        // Setup the back button from your layout
         val backButton = view.findViewById<Button>(R.id.btn_back_from_bbb)
         backButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
-            (activity as? MainActivity)?.speakOut("Returning to the home screen.")
+            // This correctly navigates back, triggering the main menu to reappear
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

@@ -485,14 +485,5 @@
 
         <!-- Add more machine cards here following the same pattern -->
 
-        <Button
-            android:id="@+id/btn_back_to_home_machines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:text="Back to Home"
-            app:backgroundTint="@color/dark_red" />
-
     </LinearLayout>
 </ScrollView>

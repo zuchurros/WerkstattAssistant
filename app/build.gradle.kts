@@ -1,4 +1,3 @@
-// Add this import statement at the top
 import java.util.Properties
 
 plugins {
@@ -6,10 +5,16 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
-// START: Define a Properties object and load the local.properties file
-val properties = Properties() // Now this will be resolved correctly
-properties.load(project.rootProject.file("local.properties").inputStream())
-// END: Correction
+// Read properties from local.properties
+val properties = Properties()
+val localPropertiesFile = project.rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.inputStream())
+}
+
+val geminiApiKey = properties.getProperty("GEMINI_API_KEY") ?: ""
+
+
 
 android {
     namespace = "com.example.workshoprobot"
@@ -24,8 +29,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // This line should already be here
-        buildConfigField("String", "GEMINI_API_KEY", "${properties["GEMINI_API_KEY"]}")
+        // Use the variable to set the build config field.
+        // The value needs to be a string literal in the generated code, so we add the escaped quotes.
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
     buildTypes {
         release {

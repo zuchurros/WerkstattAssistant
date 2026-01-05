@@ -29,7 +29,7 @@ class BigBlueButtonFragment : Fragment() {
         webView = view.findViewById(R.id.webview_bbb)
         setupWebView()
 
-        val meetingUrl = "https://demo.bigbluebutton.org/" // <-- IMPORTANT: Your meeting URL here
+        val meetingUrl = "https://demo.bigbluebutton.org/" // <-- IMPORTANT: Meeting URL here
         webView.loadUrl(meetingUrl)
 
         // Setup the back button from your layout

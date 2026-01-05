@@ -20,7 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.3">
 
-        <!-- START: ADD YOUR LOGO AND TITLE HERE -->
 
         <ImageView
             android:id="@+id/logo_image"
@@ -41,7 +40,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- END: ADD YOUR LOGO AND TITLE HERE -->
 
         <Button
             android:id="@+id/btn_home"
@@ -63,6 +61,7 @@
             android:layout_height="wrap_content"
             android:text="KI Assistant"
             app:backgroundTint="@color/dark_red" />
+
         <Button
             android:id="@+id/btn_map"
             android:layout_width="match_parent"
@@ -183,7 +182,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Member 2 -->
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -246,7 +245,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Member 3 -->
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -315,7 +314,7 @@
 
     </FrameLayout>
 
-    <!-- START: ADD THIS MUTE BUTTON -->
+    <!-- MUTE BUTTON -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_mute_toggle"
         android:layout_width="wrap_content"
@@ -327,7 +326,7 @@
         app:layout_constraintTop_toTopOf="@id/fab_voice_command"
         app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
         tools:visibility="visible"/>
-    <!-- END: ADD THIS MUTE BUTTON -->
+
 
     <!-- Voice Command Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

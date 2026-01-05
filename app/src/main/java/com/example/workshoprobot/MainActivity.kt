@@ -118,7 +118,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
-        // The btn_project listener has been removed as the button is not in the XML
 
         binding.btnMap.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
@@ -201,7 +200,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 val jsonBody = jsonObject.toString()
 
                 val request = Request.Builder()
-                    .url("http://172.16.2.238:1234/v1/chat/completions") // Your LM Studio endpoint
+                    .url("http://172.16.2.238:1234/v1/chat/completions") // LM Studio endpoint
                     .post(jsonBody.toRequestBody("application/json; charset=utf-8".toMediaType()))
                     .build()
 
@@ -274,7 +273,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (status == TextToSpeech.SUCCESS) {
             val result = tts.setLanguage(Locale.GERMAN)
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "The specified language (German) is not supported.")
+                Log.e("TTS", "The specified language is not supported.")
             }
         } else {
             Log.e("TTS", "Initialization failed.")

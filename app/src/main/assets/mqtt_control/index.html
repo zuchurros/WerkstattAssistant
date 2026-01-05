@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Remote Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            text-align: center; 
+            background: #222; 
+            color: white; 
+            /* Prevent selecting text while holding buttons on phone */
+            user-select: none; 
+            -webkit-user-select: none;
+        }
+        .controller { 
+            display: grid; 
+            grid-template-columns: 100px 100px 100px; 
+            gap: 15px; 
+            justify-content: center; 
+            margin-top: 50px; 
+        }
+        button { 
+            width: 100px; 
+            height: 80px; 
+            font-size: 18px; 
+            border-radius: 15px; 
+            border: none; 
+            background: #444; 
+            color: white; 
+            cursor: pointer; 
+            /* CRITICAL: Disables delay/scrolling on phones */
+            touch-action: none; 
+            box-shadow: 0 5px #111;
+        }
+        button:active { 
+            background: #0288d1; 
+            box-shadow: 0 2px #111;
+            transform: translateY(3px);
+        }
+        #status { margin-top: 20px; color: #aaa; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Hold to Move</h2>
+    <div id="status">Connecting...</div>
+
+    <div class="controller">
+        <button style="grid-column: 2" 
+            onmousedown="start('F')" onmouseup="stop()" onmouseleave="stop()"
+            ontouchstart="start('F')" ontouchend="stop()">UP</button>
+
+        <button style="grid-column: 1;"
+
+
+            onmousedown="start('L')" onmouseup="stop()" onmouseleave="stop()"
+            ontouchstart="start('L')" ontouchend="stop()">LEFT</button>
+        
+        <button style="background-color: #d32f2f;" onclick="stop()">STOP</button>
+
+        <button 
+            onmousedown="start('R')" onmouseup="stop()" onmouseleave="stop()"
+            ontouchstart="start('R')" ontouchend="stop()">RIGHT</button>
+
+        <button style="grid-column: 2" 
+            onmousedown="start('B')" onmouseup="stop()" onmouseleave="stop()"
+            ontouchstart="start('B')" ontouchend="stop()">DOWN</button>
+    </div>
+
+    <script>
+        // 1. Connection Setup for NGROK adress(connect to internet)
+        
+        /*let ngrokId = prompt("Enter your ngrok ID (e.g., a1b2-c3d4):");
+        if (!ngrokId) ngrokId = "YOUR-DEFAULT-ID-HERE"; // Fallback
+
+        const brokerUrl = `wss://${ngrokId}.ngrok-free.app`;*/
+
+
+        //when connected to the same wifi put the ip adress and port number
+        const brokerUrl = 'ws://192.168.137.1:9001';
+        
+        const options = {
+            clientId: 'web_' + Math.random().toString(16).substr(2, 8),
+            //username: 'your_username', 
+            //password: 'your_password'
+        };
+
+        const client = mqtt.connect(brokerUrl, options);
+
+        client.on('connect', () => {
+            document.getElementById('status').innerText = "System Ready - Hold Buttons to Move";
+            document.getElementById('status').style.color = "#4caf50";
+        });
+
+        client.on('error', (err) => {
+            document.getElementById('status').innerText = "Error Connecting";
+            console.error(err);
+        });
+
+        // 2. Movement Logic
+        function start(direction) {
+            if (client.connected) {
+                // Prevent duplicate logs if already moving
+                console.log("START:", direction);
+                client.publish('roboter/test', direction);
+                navigator.vibrate(50); // Little buzz on phone for feedback
+            }
+        }
+
+        function stop() {
+            if (client.connected) {
+                console.log("STOP");
+                client.publish('roboter/test', 'STOP');
+            }
+        }
+    </script>
+</body>
+</html>

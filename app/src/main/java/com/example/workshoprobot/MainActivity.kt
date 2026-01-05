@@ -103,8 +103,14 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             checkAndRequestMicrophonePermission()
         }
 
+        binding.btnHome.setOnClickListener {
+            // Clear the back stack to ensure we return to the initial state
+            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            // Hide the content pane to show the initial home screen content
+            binding.contentPane.visibility = View.VISIBLE
+        }
+
         binding.btnAusstattung.setOnClickListener {
-            speakOut("Die Liste der verfügbaren Maschinen anzeigen.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MachinesFragment())
                 addToBackStack(null)
@@ -115,7 +121,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // The btn_project listener has been removed as the button is not in the XML
 
         binding.btnMap.setOnClickListener {
-            speakOut("Der Werkstattplan wird angezeigt.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MapFragment())
                 addToBackStack(null)
@@ -124,7 +129,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding.btnBigbluebutton.setOnClickListener {
-            speakOut("Das Live-Meeting wird geöffnet.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, BigBlueButtonFragment())
                 addToBackStack(null)
@@ -133,9 +137,16 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding.btnAiAssistant.setOnClickListener {
-            speakOut("Der KI-Assistent wird geöffnet.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, AiAssistantFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+        binding.btnControlRobot.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(binding.contentPane.id, MqttControlFragment())
                 addToBackStack(null)
                 commit()
             }

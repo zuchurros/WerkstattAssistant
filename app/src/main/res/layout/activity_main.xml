@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/logo_image"
-            android:layout_width="578dp"
-            android:layout_height="151dp"
+            android:layout_width="309dp"
+            android:layout_height="104dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="Workshop Robot Logo"
             android:src="@drawable/thb_logo" />
@@ -74,7 +74,7 @@
             android:id="@+id/btn_control_robot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Robot Control"
+            android:text="Roboter Steuerung"
             app:backgroundTint="@color/dark_red" />
 
         <Button

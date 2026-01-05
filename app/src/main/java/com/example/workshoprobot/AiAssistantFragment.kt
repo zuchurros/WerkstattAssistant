@@ -30,21 +30,30 @@ class AiAssistantFragment : Fragment() {
         val backButton = view.findViewById<Button>(R.id.btn_back_from_ai)
 
         backButton.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
-            (activity as? MainActivity)?.speakOut("Returning to the home screen.")
+            // Use popBackStack for fragments that were added to the back stack
+            parentFragmentManager.popBackStack()
+            (activity as? MainActivity)?.speakOut("Zurück zum Startbildschirm.")
         }
     }
 
     // This public method allows MainActivity to add new messages to the chat
     fun updateChat(query: String, response: String) {
-        // Add the user's bubble
-        addMessageToChat(query, true)
+        // By using view?.post, we ensure this UI update runs on the UI thread
+        // only when the fragment's view is attached and ready.
+        view?.post {
+            // A final check to ensure the fragment is still added to its activity
+            if (!isAdded) return@post
 
-        // Add the AI's bubble
-        addMessageToChat(response, false)
+            // Add the user's bubble
+            addMessageToChat(query, true)
 
-        // Auto-scroll to the bottom to show the latest message
-        scrollView.post { scrollView.fullScroll(View.FOCUS_DOWN) }
+            // Add the AI's bubble
+            addMessageToChat(response, false)
+
+            // Auto-scroll to the bottom to show the latest message
+            // Posting the scroll action ensures it runs after the new view is laid out.
+            scrollView.post { scrollView.fullScroll(View.FOCUS_DOWN) }
+        }
     }
 
     private fun addMessageToChat(message: String, isUser: Boolean) {
@@ -62,4 +71,3 @@ class AiAssistantFragment : Fragment() {
         chatContainer.addView(bubbleView)
     }
 }
-    

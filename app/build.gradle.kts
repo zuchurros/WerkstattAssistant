@@ -1,4 +1,3 @@
-// Add this import statement at the top
 import java.util.Properties
 
 plugins {
@@ -6,10 +5,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
-// START: Define a Properties object and load the local.properties file
-val properties = Properties() // Now this will be resolved correctly
-properties.load(project.rootProject.file("local.properties").inputStream())
-// END: Correction
+// Read properties from local.properties
+val properties = Properties()
+val localPropertiesFile = project.rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.inputStream())
+}
 
 android {
     namespace = "com.example.workshoprobot"
@@ -23,9 +24,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // This line should already be here
-        buildConfigField("String", "GEMINI_API_KEY", "${properties["GEMINI_API_KEY"]}")
     }
     buildTypes {
         release {
@@ -56,9 +54,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("com.google.ai.client.generativeai:generativeai:0.5.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }

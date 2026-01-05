@@ -12,10 +12,6 @@ if (localPropertiesFile.exists()) {
     properties.load(localPropertiesFile.inputStream())
 }
 
-val geminiApiKey = properties.getProperty("GEMINI_API_KEY") ?: ""
-
-
-
 android {
     namespace = "com.example.workshoprobot"
     compileSdk = 34
@@ -28,10 +24,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // Use the variable to set the build config field.
-        // The value needs to be a string literal in the generated code, so we add the escaped quotes.
-        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
     buildTypes {
         release {
@@ -62,9 +54,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("com.google.ai.client.generativeai:generativeai:0.5.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }

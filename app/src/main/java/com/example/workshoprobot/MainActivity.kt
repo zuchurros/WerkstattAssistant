@@ -16,12 +16,47 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.workshoprobot.databinding.ActivityMainBinding
-import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 import java.util.Locale
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+
+// Suspend extension function to bridge OkHttp callbacks with coroutines
+suspend fun Call.await(): Response {
+    return suspendCancellableCoroutine { continuation ->
+        enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                continuation.resume(response)
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                // Don't resume with exception if coroutine was cancelled
+                if (continuation.isCancelled) return
+                continuation.resumeWithException(e)
+            }
+        })
+
+        continuation.invokeOnCancellation {
+            cancel()
+        }
+    }
+}
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
@@ -29,13 +64,15 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var binding: ActivityMainBinding
 
     // AI and State Management
-    private var geminiJob: Job? = null
-    private var aiAssistantFragment: AiAssistantFragment? = null
+    private var llmJob: Job? = null
     private var isMuted = false
 
     // Core Speech Components
     private lateinit var tts: TextToSpeech
     private lateinit var speechRecognizer: SpeechRecognizer
+
+    // OkHttp Client
+    private val client = OkHttpClient()
 
     // Activity result launcher for microphone permission
     private val requestPermissionLauncher =
@@ -59,13 +96,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // Setup listeners for all buttons using the safe 'binding' object
         setupClickListeners()
-
-        // Listener to show navigation pane when returning to home
-        supportFragmentManager.addOnBackStackChangedListener {
-            if (supportFragmentManager.backStackEntryCount == 0) {
-                binding.navigationPane.visibility = View.VISIBLE
-            }
-        }
     }
 
     private fun setupClickListeners() {
@@ -73,11 +103,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             checkAndRequestMicrophonePermission()
         }
 
-        binding.btnHome.setOnClickListener {
-            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        }
-
         binding.btnAusstattung.setOnClickListener {
+            speakOut("Die Liste der verfügbaren Maschinen anzeigen.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MachinesFragment())
                 addToBackStack(null)
@@ -85,7 +112,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
+        // The btn_project listener has been removed as the button is not in the XML
+
         binding.btnMap.setOnClickListener {
+            speakOut("Der Werkstattplan wird angezeigt.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, MapFragment())
                 addToBackStack(null)
@@ -94,7 +124,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding.btnBigbluebutton.setOnClickListener {
-            binding.navigationPane.visibility = View.GONE
+            speakOut("Das Live-Meeting wird geöffnet.")
             supportFragmentManager.beginTransaction().apply {
                 replace(binding.contentPane.id, BigBlueButtonFragment())
                 addToBackStack(null)
@@ -102,27 +132,17 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
-        binding.btnControlRobot.setOnClickListener {
-            binding.navigationPane.visibility = View.GONE
-            supportFragmentManager.beginTransaction().apply {
-                replace(binding.contentPane.id, ControlFragment())
-                addToBackStack(null)
-                commit()
-            }
-        }
-
         binding.btnAiAssistant.setOnClickListener {
-            val fragment = AiAssistantFragment()
-            aiAssistantFragment = fragment
+            speakOut("Der KI-Assistent wird geöffnet.")
             supportFragmentManager.beginTransaction().apply {
-                replace(binding.contentPane.id, fragment)
+                replace(binding.contentPane.id, AiAssistantFragment())
                 addToBackStack(null)
                 commit()
             }
         }
 
         binding.fabStopSpeaking.setOnClickListener {
-            geminiJob?.cancel() // Interrupts the API call
+            llmJob?.cancel() // Interrupts the API call
             if (::tts.isInitialized && tts.isSpeaking) {
                 tts.stop() // Silences the voice
             }
@@ -150,28 +170,76 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun processAiQuery(query: String) {
         Log.d("DEBUG_AI", "processAiQuery called with: '$query'")
-        geminiJob?.cancel() // Cancel any old job
+        llmJob?.cancel() // Cancel any old job
 
-        val generativeModel = GenerativeModel("gemini-2.5-flash", BuildConfig.GEMINI_API_KEY)
-
-        geminiJob = CoroutineScope(Dispatchers.Main).launch {
+        llmJob = CoroutineScope(Dispatchers.Main).launch {
             try {
                 speakOut("Einen Moment, ich denke nach...")
-                val response = generativeModel.generateContent(query)
-                response.text?.let { responseText ->
-                    aiAssistantFragment?.updateChat(query, responseText)
+
+                // Construct the JSON body according to OpenAI's API structure
+                val messagesArray = JSONArray().apply {
+                    put(JSONObject().apply {
+                        put("role", "user")
+                        put("content", query)
+                    })
+                }
+                val jsonObject = JSONObject().apply {
+                    put("messages", messagesArray)
+                    put("temperature", 0.7)
+                }
+                val jsonBody = jsonObject.toString()
+
+                val request = Request.Builder()
+                    .url("http://172.16.2.238:1234/v1/chat/completions") // Your LM Studio endpoint
+                    .post(jsonBody.toRequestBody("application/json; charset=utf-8".toMediaType()))
+                    .build()
+
+                // Execute request and handle response on the correct threads
+                val response = withContext(Dispatchers.IO) {
+                    client.newCall(request).await()
+                }
+
+                if (response.isSuccessful) {
+                    val responseBody = response.body?.string()
+                    var responseText = "Ich habe leider keine Antwort darauf gefunden."
+                    if (responseBody != null) {
+                        try {
+                            val responseJson = JSONObject(responseBody)
+                            val choices = responseJson.getJSONArray("choices")
+                            if (choices.length() > 0) {
+                                val message = choices.getJSONObject(0).getJSONObject("message")
+                                responseText = message.getString("content")
+                            }
+                        } catch (e: JSONException) {
+                            Log.e("OkHttpParseError", "Failed to parse OpenAI-compatible response", e)
+                        }
+                    }
+                    
+                    // Find the current fragment and update it, ensuring it's the correct one
+                    val aiFragment = supportFragmentManager.findFragmentById(binding.contentPane.id) as? AiAssistantFragment
+                    aiFragment?.updateChat(query, responseText)
+                    
                     val textForSpeech = responseText.replace("*", "")
                     tts.language = Locale.GERMAN
                     speakOut(textForSpeech)
-                } ?: run {
-                    speakOut("Ich habe leider keine Antwort darauf gefunden.")
-                }
-            } catch (e: Exception) {
-                if (e is kotlinx.coroutines.CancellationException) {
-                    Log.d("DEBUG_AI", "Gemini job was cancelled by user.")
                 } else {
-                    Log.e("GeminiError", "API call failed", e)
-                    speakOut("Entschuldigung, es gab ein Problem bei der Verarbeitung meiner Antwort.")
+                    Log.e("OkHttpError", "API call not successful: ${'$'}{response.code} ${'$'}{response.message}")
+                    speakOut("Entschuldigung, der Server hat einen Fehler zurückgegeben.")
+                }
+
+            } catch (e: Exception) {
+                when (e) {
+                    is kotlinx.coroutines.CancellationException -> {
+                        Log.d("DEBUG_AI", "LLM job was cancelled by user.")
+                    }
+                    is IOException -> {
+                        Log.e("OkHttpError", "API call failed", e)
+                        speakOut("Entschuldigung, es gab ein Problem bei der Verbindung zum lokalen LLM.")
+                    }
+                    else -> {
+                        Log.e("LLMError", "Processing failed", e)
+                        speakOut("Entschuldigung, es gab ein Problem bei der Verarbeitung meiner Antwort.")
+                    }
                 }
             }
         }
@@ -262,7 +330,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     override fun onDestroy() {
-        geminiJob?.cancel()
+        llmJob?.cancel()
         if (::tts.isInitialized) {
             tts.stop()
             tts.shutdown()

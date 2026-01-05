@@ -43,12 +43,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture Machine 1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/solarthermiekollektor" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zug- und Leitspindeldrehmaschine FAMOT TUM-35"
+                    android:text="Evakuierte Rohr Solarthermiekollektor"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -76,12 +76,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture Machine 2"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/sonnensimulator" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Universal Werkzeugfräsmaschine AVIA C20"
+                    android:text="Sonnensimulator"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -109,12 +109,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 3"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/trumpf" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4-Achs-CNC-Fräsmaschine Spinner VC750"
+                    android:text="Der TRUMPF HL 1003D"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -142,12 +142,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 4"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/forcetig" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zyklen gestreuerte Drehmaschine Weiler E40 mit Weiler SL2 Steuerung"
+                    android:text="EWM ForceTig 1002"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -175,12 +175,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 5"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/tetrix500" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Säulenbohrmaschine ALZMETALL AB 4"
+                    android:text="EWM Tetrix 500 AC/DC"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -208,12 +208,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 6"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/brennerreinigungsstation" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Präzisions-Flachschleifmaschine Chevalier FSG-1020 AD"
+                    android:text="Abicor Benzel-Rauchabsaugsystem/Brennerreinigungsstation"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -241,12 +241,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 7"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/lasersystem" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vertikal-Bandsäge PEHAKA USM 4"
+                    android:text="Industrielles Lasersystem in einem Schutzgehäuse untergebracht"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -274,12 +274,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 8"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/massgefertigtes" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Halbautomatische Schwenkrahmen-Metallbandsäge Metallkraft BMBS 300 x 320 HA-DG"
+                    android:text="maßgefertigtes Gerät für die industrielle Verfahrenstechnik"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -307,12 +307,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 9"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/emotor" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wasserstrahlmaschine Maxiem 0707"
+                    android:text="Elektromotor-Prüfstand"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -340,12 +340,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 10"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/rohrleitungsysteme" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rundbiegemaschine RMA 10/40"
+                    android:text="Ausbildungsmodul für Rohrleitungssysteme oder Laborausrüstung für Strömungsmechanik"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -373,12 +373,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 11"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/et210" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Manuelle Schwenkbiegemaschine Schechtl HA 200"
+                    android:text="ET 210 - Grundlagen von Windkraftanlagen - Schulungs- und Versuchsheit"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -406,12 +406,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 12"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/pem" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Motortafelschere Typ 155.09"
+                    android:text="PEM-Brennstoffzellensystem"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -439,12 +439,12 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 13"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/windkanal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ageo 2-Säulen-Handspindelpresse Modell SP28/510"
+                    android:text="Labor-Unterschallwindkanal"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -472,12 +472,309 @@
                     android:background="#e0e0e0"
                     android:contentDescription="Picture of Machine 14"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/smarthome" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Schweißarbeitsplatz mit Absaugung"
+                    android:text="Prozessüberwachung einer verfahrenstechnischen Anlage mittels Smart-Home Komponenten"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 15 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 15"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/zyklon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zyklon"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 16 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 16"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/rohrpreuf" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Röhrleitungsprüfstand"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 17 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 17"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/alfa" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alfa Laval Industriesteuerungssystem"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 18 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 18"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/k15regler" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Haake K15 Umwälzkühlbad mit DC1-Regler"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 19 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 19"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/k15zirkulator" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Haake K15 Kühlwasserbad mit c1-Zirkulator"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 20 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tyre" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Erweiterung des Tyre Property Laboratory (ETPL)"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 21 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 21"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ekart" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-Kart-Station"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 22 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 22"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/didatic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Festo Didatic Schulungssystem"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Machine 23 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#e0e0e0"
+                    android:contentDescription="Picture of Machine 23"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cnc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Isel FlatCom XL CNC-Fräsmaschine"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>

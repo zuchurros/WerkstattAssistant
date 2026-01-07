@@ -37,7 +37,7 @@ import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-// Suspend extension function to bridge OkHttp callbacks with coroutines
+// Suspend extension function to bridge OkHttp callbacks with coroutine
 suspend fun Call.await(): Response {
     return suspendCancellableCoroutine { continuation ->
         enqueue(object : Callback {

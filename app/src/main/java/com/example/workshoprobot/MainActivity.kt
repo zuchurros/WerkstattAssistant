@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     // AI and State Management
     private var llmJob: Job? = null
     private var isMuted = false
+    val chatHistory = mutableListOf<Pair<String, Boolean>>() // true for user, false for AI
 
     // Core Speech Components
     private lateinit var tts: TextToSpeech
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         binding.btnAiAssistant.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
-                replace(binding.contentPane.id, AiAssistantFragment())
+                replace(binding.contentPane.id, AiAssistantFragment(), "AI_ASSISTANT_FRAGMENT_TAG")
                 addToBackStack(null)
                 commit()
             }
@@ -224,11 +225,16 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                             Log.e("OkHttpParseError", "Failed to parse OpenAI-compatible response", e)
                         }
                     }
-                    
-                    // Find the current fragment and update it, ensuring it's the correct one
-                    val aiFragment = supportFragmentManager.findFragmentById(binding.contentPane.id) as? AiAssistantFragment
-                    aiFragment?.updateChat(query, responseText)
-                    
+                    chatHistory.add(Pair(query, true))
+                    chatHistory.add(Pair(responseText, false))
+
+                    val aiFragment = supportFragmentManager.findFragmentByTag("AI_ASSISTANT_FRAGMENT_TAG") as? AiAssistantFragment
+                    if (aiFragment?.isVisible == true) {
+                        aiFragment.onNewMessage()
+                    } else {
+                        // Switch to the AI Assistant fragment, which will then load the history
+                        binding.btnAiAssistant.performClick()
+                    }
                     val textForSpeech = responseText.replace("*", "")
                     tts.language = Locale.GERMAN
                     speakOut(textForSpeech)

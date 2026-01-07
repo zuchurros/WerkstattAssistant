@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -27,15 +26,22 @@ class AiAssistantFragment : Fragment() {
 
         chatContainer = view.findViewById(R.id.chat_container)
         scrollView = view.findViewById(R.id.scroll_view_chat)
+
+        // Load chat history when the fragment is created
+        loadChatHistory()
+    }
+
+    private fun loadChatHistory() {
+        val mainActivity = activity as? MainActivity
+        mainActivity?.chatHistory?.forEach {
+            addMessageToChat(it.first, it.second)
+        }
     }
 
     // This public method allows MainActivity to add new messages to the chat
-    fun updateChat(query: String, response: String) {
-        // Add the user's bubble
-        addMessageToChat(query, true)
-
-        // Add the AI's bubble
-        addMessageToChat(response, false)
+    fun onNewMessage() {
+        chatContainer.removeAllViews() // Clear existing views to prevent duplicates
+        loadChatHistory() // Reload the entire history
 
         // Auto-scroll to the bottom to show the latest message
         scrollView.post { scrollView.fullScroll(View.FOCUS_DOWN) }
@@ -56,4 +62,3 @@ class AiAssistantFragment : Fragment() {
         chatContainer.addView(bubbleView)
     }
 }
-    

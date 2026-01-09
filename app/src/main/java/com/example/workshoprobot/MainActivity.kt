@@ -183,6 +183,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         Log.d("DEBUG_AI", "processAiQuery called with: '$query'")
         llmJob?.cancel() // Cancel any old job
 
+        // Add user message to history immediately and update UI
+        chatHistory.add(Pair(query, true))
+        updateChatUi()
+
         llmJob = CoroutineScope(Dispatchers.Main).launch {
             try {
                 speakOut("Einen Moment, ich denke nach...")
@@ -225,22 +229,19 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                             Log.e("OkHttpParseError", "Failed to parse OpenAI-compatible response", e)
                         }
                     }
-                    chatHistory.add(Pair(query, true))
+                    
                     chatHistory.add(Pair(responseText, false))
+                    updateChatUi()
 
-                    val aiFragment = supportFragmentManager.findFragmentByTag("AI_ASSISTANT_FRAGMENT_TAG") as? AiAssistantFragment
-                    if (aiFragment?.isVisible == true) {
-                        aiFragment.onNewMessage()
-                    } else {
-                        // Switch to the AI Assistant fragment, which will then load the history
-                        binding.btnAiAssistant.performClick()
-                    }
                     val textForSpeech = responseText.replace("*", "")
                     tts.language = Locale.GERMAN
                     speakOut(textForSpeech)
                 } else {
-                    Log.e("OkHttpError", "API call not successful: ${'$'}{response.code} ${'$'}{response.message}")
-                    speakOut("Entschuldigung, der Server hat einen Fehler zurückgegeben.")
+                    Log.e("OkHttpError", "API call not successful: ${response.code} ${response.message}")
+                    val errorMsg = "Entschuldigung, der Server hat einen Fehler zurückgegeben."
+                    chatHistory.add(Pair(errorMsg, false))
+                    updateChatUi()
+                    speakOut(errorMsg)
                 }
 
             } catch (e: Exception) {
@@ -250,13 +251,33 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     }
                     is IOException -> {
                         Log.e("OkHttpError", "API call failed", e)
-                        speakOut("Entschuldigung, es gab ein Problem bei der Verbindung zum lokalen LLM.")
+                        val errorMsg = "Entschuldigung, es gab ein Problem bei der Verbindung zum lokalen LLM."
+                        chatHistory.add(Pair(errorMsg, false))
+                        updateChatUi()
+                        speakOut(errorMsg)
                     }
                     else -> {
                         Log.e("LLMError", "Processing failed", e)
-                        speakOut("Entschuldigung, es gab ein Problem bei der Verarbeitung meiner Antwort.")
+                        val errorMsg = "Entschuldigung, es gab ein Problem bei der Verarbeitung meiner Antwort."
+                        chatHistory.add(Pair(errorMsg, false))
+                        updateChatUi()
+                        speakOut(errorMsg)
                     }
                 }
+            }
+        }
+    }
+
+    private fun updateChatUi() {
+        val aiFragment = supportFragmentManager.findFragmentByTag("AI_ASSISTANT_FRAGMENT_TAG") as? AiAssistantFragment
+        if (aiFragment != null && aiFragment.isVisible) {
+            aiFragment.onNewMessage()
+        } else {
+            // If the fragment is not visible, we switch to it. 
+            // performClick() handles the fragment transaction and tag assignment.
+            val currentFragment = supportFragmentManager.findFragmentById(binding.contentPane.id)
+            if (currentFragment !is AiAssistantFragment) {
+                binding.btnAiAssistant.performClick()
             }
         }
     }

@@ -46,7 +46,7 @@ class BigBlueButtonFragment : Fragment() {
         webView.settings.domStorageEnabled = true // Needed for modern web apps
         webView.settings.mediaPlaybackRequiresUserGesture = false
 
-        // This is the crucial part for camera/microphone access
+        // This is for camera/microphone access
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
                 request?.grant(request.resources)

@@ -79,7 +79,7 @@
 
 
         //when connected to the same wifi put the ip adress and port number
-        const brokerUrl = 'ws://192.168.137.1:9001';
+        const brokerUrl = '%%MQTT_BROKER_URL%%';
         
         const options = {
             clientId: 'web_' + Math.random().toString(16).substr(2, 8),

@@ -25,8 +25,11 @@ class MqttControlFragment : Fragment() {
         webView = view.findViewById(R.id.webview_mqtt)
         setupWebView()
 
-        // Load the local HTML file from the assets folder
-        webView.loadUrl("file:///android_asset/mqtt_control/index.html")
+        // Load the local HTML file, injecting the broker URL from build config
+        val html = requireContext().assets.open("mqtt_control/index.html")
+            .bufferedReader().use { it.readText() }
+            .replace("%%MQTT_BROKER_URL%%", BuildConfig.MQTT_BROKER_URL)
+        webView.loadDataWithBaseURL("file:///android_asset/mqtt_control/", html, "text/html", "UTF-8", null)
     }
 
     private fun setupWebView() {

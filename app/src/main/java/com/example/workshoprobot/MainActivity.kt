@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 val jsonBody = jsonObject.toString()
 
                 val request = Request.Builder()
-                    .url("http://172.16.2.238:1234/v1/chat/completions") // LM Studio endpoint
+                    .url("${BuildConfig.LM_STUDIO_URL}/v1/chat/completions") // LM Studio endpoint
                     .post(jsonBody.toRequestBody("application/json; charset=utf-8".toMediaType()))
                     .build()
 

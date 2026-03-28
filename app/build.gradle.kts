@@ -24,6 +24,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "LM_STUDIO_URL", "\"${properties.getProperty("LM_STUDIO_URL", "http://localhost:1234")}\"")
+        buildConfigField("String", "MQTT_BROKER_URL", "\"${properties.getProperty("MQTT_BROKER_URL", "ws://192.168.1.1:9001")}\"")
     }
     buildTypes {
         release {

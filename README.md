@@ -28,12 +28,15 @@
     git clone https://github.com/[YOUR_USERNAME]/WorkshopRobot.git
     ```
 
-2.  **API Key:**
-    *   Create a file named `local.properties` in the root directory of the project.
-    *   Add your Gemini API key to `local.properties`:
+2.  **Local configuration:**
+    *   Create a file named `local.properties` in the root directory of the project (it is already in `.gitignore`).
+    *   Add your environment-specific values:
         ```
-        GEMINI_API_KEY="YOUR_API_KEY"
+        LM_STUDIO_URL=http://<your-lm-studio-host>:1234
+        MQTT_BROKER_URL=ws://<your-mqtt-broker-host>:9001
         ```
+    *   `LM_STUDIO_URL` — base URL of the OpenAI-compatible LLM server (no trailing slash).
+    *   `MQTT_BROKER_URL` — WebSocket URL of the MQTT broker used by the robot controller.
 
 3.  **Build the project:**
     *   Open the project in Android Studio.
